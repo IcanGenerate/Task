@@ -6,7 +6,7 @@ This is a simple counter app that only allows positive numbers. The app includes
 
 ## 🔧 Features
 
-- Counter starts at 0 and only shows positive numbers
+- Counter starts at 1 and only shows positive numbers
 - Buttons:
   - ➕ Increment: increases the count
   - ➖ Decrement: decreases the count (but not below 0)
