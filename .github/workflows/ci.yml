@@ -19,8 +19,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
+      - name: Cache Cypress binary
+        uses: actions/cache@v3
         with:
-          start: npx http-server -p 3000
-          wait-on: http://localhost:3000
+          path: ~/.cache/Cypress
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}
+
+      - name: Install Cypress binary
+        run: npx cypress install
+
+      - name: Start local server
+        run: |
+          npx http-server -p 3000 &
+          sleep 5
+
+      - name: Run Cypress tests
+        run: npx cypress run
